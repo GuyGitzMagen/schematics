@@ -1,5 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { <%= classify(className) %> } from './<%= name %>';
+import { createMock } from '@golevelup/ts-jest';
 
 describe('<%= classify(className) %>', () => {
   let provider: <%= classify(className) %>;
@@ -7,7 +8,9 @@ describe('<%= classify(className) %>', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [<%= classify(className) %>],
-    }).compile();
+    })
+      .useMocker(() => createMock())
+      .compile();
 
     provider = module.get<<%= classify(className) %>>(<%= classify(className) %>);
   });
